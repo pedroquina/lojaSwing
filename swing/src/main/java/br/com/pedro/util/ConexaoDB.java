@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.swing.JOptionPane;
+
 public class ConexaoDB {
  
     
@@ -22,7 +24,9 @@ public class ConexaoDB {
                  "sa",  // usuário 
                   "") ; // senha
         } catch (Exception erro) {
-            System.out.println("Erro (getConnection) : " + erro.getMessage());
+            String msg = "Erro (getConnection) : " + erro.getMessage();
+            System.out.println(msg);
+            JOptionPane.showMessageDialog(null, msg);
         }
 
         return conn;
