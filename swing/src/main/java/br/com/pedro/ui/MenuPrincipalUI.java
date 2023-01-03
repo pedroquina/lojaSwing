@@ -72,10 +72,20 @@ public class MenuPrincipalUI implements ActionListener{
 
         if(e.getActionCommand().equals("Usuario")){
             UsuarioUI usuario = new UsuarioUI();
+            this.frame.getContentPane().removeAll();
             this.frame.getContentPane().add(usuario);
             this.frame.validate();
             this.frame.repaint();
         }
+
+        if(e.getActionCommand().equals("Produto")){
+            ProdutoUI produto = new ProdutoUI();
+            this.frame.getContentPane().removeAll();
+            this.frame.getContentPane().add(produto);
+            this.frame.validate();
+            this.frame.repaint();
+        }
+
 
 
        if ( e.getActionCommand().equals("Sair")){
