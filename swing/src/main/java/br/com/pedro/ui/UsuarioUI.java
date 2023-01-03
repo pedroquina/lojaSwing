@@ -69,11 +69,12 @@ public class UsuarioUI extends JPanel implements ActionListener, ListSelectionLi
         btnSalvar.setBounds(120,200,80,25);
         btnLimpar.setText("Limpar");
         btnLimpar.setBounds(200,200,80,25);
-        btnLimpar.setText("Excluir");
-        btnLimpar.setBounds(280,200,80,25);
+        btnExcluir.setText("Excluir");
+        btnExcluir.setBounds(280,200,80,25);
         scroll.setBounds(10, 250, 600, 400);
         btnSalvar.addActionListener(this);
         btnLimpar.addActionListener(this);
+        btnExcluir.addActionListener(this);
         tblUsuario.getSelectionModel().addListSelectionListener(this);
         tblUsuario.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         txtNome.requestFocus();
@@ -132,6 +133,7 @@ public class UsuarioUI extends JPanel implements ActionListener, ListSelectionLi
             UsuarioService usuarioService = new UsuarioService();
             usuarioService.salvar(usuarioEntity);
             atualizarTabela();
+            return;
         }
         if ( e.getActionCommand().equals("Limpar")){
             txtId.setText("");
@@ -139,12 +141,14 @@ public class UsuarioUI extends JPanel implements ActionListener, ListSelectionLi
             txtEmail.setText("");
             txtSenha.setText("");
             txtNome.requestFocus();
-        }
-        if ( txtId.getText().equals("") ){
-            JOptionPane.showMessageDialog(this, "Esse registro não pode ser excluido");
             return;
         }
+
         if( e.getActionCommand().equals("Excluir")){
+            if ( txtId.getText().equals("") ){
+                JOptionPane.showMessageDialog(this, "Esse registro não pode ser excluido");
+                return;
+            }
             if (JOptionPane.showConfirmDialog(this, "Confirma a exclusão ?","Excluir",JOptionPane.OK_CANCEL_OPTION)==JOptionPane.CANCEL_OPTION){
                 return;
             }

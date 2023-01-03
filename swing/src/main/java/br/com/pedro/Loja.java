@@ -21,14 +21,14 @@ public final class Loja {
     public static void main(String[] args) {
             JFrame frame = new JFrame("Loja");
 
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  // define comportamento do botão "X"
             
-            MenuPrincipalUI menu = new MenuPrincipalUI(frame);
+            MenuPrincipalUI menu = new MenuPrincipalUI(frame); // instanciam objeto da classe MenuPrincipalUI
             frame.setJMenuBar(menu.getMenuBar());
             
-            frame.setPreferredSize(new Dimension(800,800));
+            frame.setPreferredSize(new Dimension(800,800)); // tamanho do frame em largura e altura em pixels
             frame.pack();
-            frame.setVisible(true);
+            frame.setVisible(true); // faz o frame ser apresentado
         
     }
 }
