@@ -1,4 +1,4 @@
-package br.com.pedro.ui;
+package br.com.pedro.loja.ui;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;

@@ -1,4 +1,4 @@
-package br.com.pedro.ui;
+package br.com.pedro.loja.ui;
 
 import java.awt.Component;
 import java.util.List;
@@ -16,8 +16,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
-import br.com.pedro.entity.UsuarioEntity;
-import br.com.pedro.service.UsuarioService;
+import br.com.pedro.loja.entity.UsuarioEntity;
+import br.com.pedro.loja.service.UsuarioService;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

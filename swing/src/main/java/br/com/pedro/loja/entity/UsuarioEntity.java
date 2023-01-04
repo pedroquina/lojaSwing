@@ -1,4 +1,4 @@
-package br.com.pedro.entity;
+package br.com.pedro.loja.entity;
 
 public class UsuarioEntity {
     

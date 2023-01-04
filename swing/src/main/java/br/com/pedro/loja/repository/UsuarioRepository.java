@@ -1,11 +1,11 @@
-package br.com.pedro.repository;
+package br.com.pedro.loja.repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.pedro.entity.UsuarioEntity;
+import br.com.pedro.loja.entity.UsuarioEntity;
 import br.com.pedro.util.ConexaoDB;
 
 public class UsuarioRepository {

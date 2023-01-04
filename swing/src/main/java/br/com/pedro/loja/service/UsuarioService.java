@@ -1,10 +1,10 @@
-package br.com.pedro.service;
+package br.com.pedro.loja.service;
 
 import java.sql.SQLException;
 import java.util.List;
 
-import br.com.pedro.entity.UsuarioEntity;
-import br.com.pedro.repository.UsuarioRepository;
+import br.com.pedro.loja.entity.UsuarioEntity;
+import br.com.pedro.loja.repository.UsuarioRepository;
 
 public class UsuarioService {
     
