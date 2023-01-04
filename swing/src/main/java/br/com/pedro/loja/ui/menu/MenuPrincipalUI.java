@@ -96,7 +96,7 @@ public class MenuPrincipalUI implements ActionListener,MouseListener{
        System.out.println("ID : " + e.getID());
        
 
-        if(e.getActionCommand().equals("Usuario")){
+        if(e.getActionCommand().equals("Usuário")){
             UsuarioUI usuario = new UsuarioUI();   // instancia o painel do cdastro de usu�rio 
             this.frame.getContentPane().removeAll(); // remove todos os pain�is do frame
             this.frame.getContentPane().add(usuario); // adiciona o painel do cadastro de usu�rio ao frame

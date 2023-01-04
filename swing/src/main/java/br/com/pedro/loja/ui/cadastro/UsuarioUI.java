@@ -1,5 +1,6 @@
 package br.com.pedro.loja.ui.cadastro;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.util.List;
 
@@ -37,25 +38,30 @@ public class UsuarioUI extends JPanel implements ActionListener, ListSelectionLi
     private JPasswordField txtSenha = new JPasswordField();
     private String[] tituloColunas = {"ID","Nome","Email",""};
     private JTable tblUsuario = new JTable(){
-        public boolean editCellAt(int row, int column, java.util.EventObject e) {
-           return false;
-        }
+        public boolean editCellAt(int row, int column, java.util.EventObject e) {  // não permitir edição
+            return false;
+         }
      };
     private JScrollPane scroll = new JScrollPane(tblUsuario);
 
-
+     
     
     public UsuarioUI(){
         componentes();
+
+        
     }
 
 
     void componentes(){
-        this.setLayout(null);
-        lblId.setText("ID");
-        lblId.setBounds(10,10,80,25);
+        this.setLayout(null); // layout é o programador que define a posição dos componentes
+        int larguraPanel = this.getWidth();
+        int alturaPanel = this.getHeight();
+
+        lblId.setText("ID");  // configura o texto do componente
+        lblId.setBounds(10,10,80,25); // coordenadas
         txtId.setBounds(10,30,80,25);
-        txtId.setEnabled(false);
+        txtId.setEnabled(false);  // desabilita edição
         lblNome.setText("Nome");
         lblNome.setBounds(10,60,80,25);
         txtNome.setBounds(10,80,80,25);
@@ -75,12 +81,11 @@ public class UsuarioUI extends JPanel implements ActionListener, ListSelectionLi
         btnSalvar.addActionListener(this);
         btnLimpar.addActionListener(this);
         btnExcluir.addActionListener(this);
-        tblUsuario.getSelectionModel().addListSelectionListener(this);
-        tblUsuario.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        txtNome.requestFocus();
-
+        tblUsuario.getSelectionModel().addListSelectionListener(this);  // configura captura de evento na tabela
+        tblUsuario.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // permite seleção da linha da tabela
         
-
+        
+        
         this.add(lblId);
         this.add(txtId);
         this.add(lblNome);
@@ -95,7 +100,8 @@ public class UsuarioUI extends JPanel implements ActionListener, ListSelectionLi
 
         this.add(scroll);
         atualizarTabela();
-
+        txtNome.requestFocus();  // coloca o foco ( cursor ) no componente
+        
     }
 
 
@@ -162,7 +168,7 @@ public class UsuarioUI extends JPanel implements ActionListener, ListSelectionLi
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
-        System.out.println("Line :" + e.getLastIndex());
+        System.out.println("Line :" + tblUsuario.getSelectedRow());
 
         if ( tblUsuario.getSelectedRow()<0) return;
 
