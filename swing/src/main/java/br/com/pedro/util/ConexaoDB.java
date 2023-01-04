@@ -24,9 +24,9 @@ public class ConexaoDB {
                  "sa",  // usuário 
                   "") ; // senha
         } catch (Exception erro) {
-            String msg = "Erro (getConnection) : " + erro.getMessage();
+            String msg = "Erro (getConnection) : Banco de dados ou driver não encontrados !!" ;
             System.out.println(msg);
-            JOptionPane.showMessageDialog(null, msg);
+            JOptionPane.showMessageDialog(null, msg,"Erro",JOptionPane.ERROR_MESSAGE);
         }
 
         return conn;

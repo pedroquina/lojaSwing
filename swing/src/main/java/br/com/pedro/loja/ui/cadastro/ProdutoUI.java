@@ -1,4 +1,4 @@
-package br.com.pedro.loja.ui;
+package br.com.pedro.loja.ui.cadastro;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;

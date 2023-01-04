@@ -5,7 +5,7 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
-import br.com.pedro.loja.ui.MenuPrincipalUI;
+import br.com.pedro.loja.ui.menu.MenuPrincipalUI;
 
 /**
  * Hello world!

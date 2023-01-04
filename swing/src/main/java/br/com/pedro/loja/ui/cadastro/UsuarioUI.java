@@ -1,4 +1,4 @@
-package br.com.pedro.loja.ui;
+package br.com.pedro.loja.ui.cadastro;
 
 import java.awt.Component;
 import java.util.List;
