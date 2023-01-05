@@ -43,15 +43,10 @@ public class UsuarioUI extends JPanel implements ActionListener, ListSelectionLi
          }
      };
     private JScrollPane scroll = new JScrollPane(tblUsuario);
-
-     
     
     public UsuarioUI(){
         componentes();
-
-        
     }
-
 
     void componentes(){
         this.setLayout(null); // layout é o programador que define a posição dos componentes
@@ -59,7 +54,7 @@ public class UsuarioUI extends JPanel implements ActionListener, ListSelectionLi
         int alturaPanel = this.getHeight();
 
         lblId.setText("ID");  // configura o texto do componente
-        lblId.setBounds(10,10,80,25); // coordenadas
+        lblId.setBounds(10,10,80,25); // coordenadas ( x, y, largura e altura )
         txtId.setBounds(10,30,80,25);
         txtId.setEnabled(false);  // desabilita edição
         lblNome.setText("Nome");
@@ -78,7 +73,7 @@ public class UsuarioUI extends JPanel implements ActionListener, ListSelectionLi
         btnExcluir.setText("Excluir");
         btnExcluir.setBounds(280,200,80,25);
         scroll.setBounds(10, 250, 600, 400);
-        btnSalvar.addActionListener(this);
+        btnSalvar.addActionListener(this); // configura captura de evento
         btnLimpar.addActionListener(this);
         btnExcluir.addActionListener(this);
         tblUsuario.getSelectionModel().addListSelectionListener(this);  // configura captura de evento na tabela
@@ -86,7 +81,7 @@ public class UsuarioUI extends JPanel implements ActionListener, ListSelectionLi
         
         
         
-        this.add(lblId);
+        this.add(lblId); // adiciona o componente no painel
         this.add(txtId);
         this.add(lblNome);
         this.add(txtNome);
@@ -97,7 +92,6 @@ public class UsuarioUI extends JPanel implements ActionListener, ListSelectionLi
         this.add(btnSalvar);
         this.add(btnLimpar);
         this.add(btnExcluir);
-
         this.add(scroll);
         atualizarTabela();
         txtNome.requestFocus();  // coloca o foco ( cursor ) no componente
@@ -105,15 +99,18 @@ public class UsuarioUI extends JPanel implements ActionListener, ListSelectionLi
     }
 
 
+    /*
+     * Atualizar conteúdo da tabela (Jtable) com os dados do banco de dados
+     */
     public void atualizarTabela(){
         UsuarioService usuarioService = new UsuarioService();
 
         List<UsuarioEntity> lista = usuarioService.listar();
         DefaultTableModel modelo = (DefaultTableModel) tblUsuario.getModel();
-        modelo.setColumnIdentifiers(tituloColunas);
-        modelo.setRowCount(0);
-        lista.forEach(usuario ->{
-            modelo.addRow(new Object[]{
+        modelo.setColumnIdentifiers(tituloColunas); // configura títulos das colunas da tabela
+        modelo.setRowCount(0); // remove todas as linhsa da tabela
+        lista.forEach(usuario ->{ // percorre todos os objetos da lista
+            modelo.addRow(new Object[]{ // adiciona os atributos do objeto a linha da tabela
                 usuario.getUsuarioId(),
                 usuario.getNome(),
                 usuario.getEmail(),
@@ -126,6 +123,9 @@ public class UsuarioUI extends JPanel implements ActionListener, ListSelectionLi
 
 
 
+    /*
+     * Esse método é chamado a cada evento de click do mouse
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("Command : " + e.getActionCommand());
@@ -166,6 +166,9 @@ public class UsuarioUI extends JPanel implements ActionListener, ListSelectionLi
     }
 
 
+    /*
+     * Esse método é chamado ao clicar nas linhas da tabela
+     */
     @Override
     public void valueChanged(ListSelectionEvent e) {
         System.out.println("Line :" + tblUsuario.getSelectedRow());

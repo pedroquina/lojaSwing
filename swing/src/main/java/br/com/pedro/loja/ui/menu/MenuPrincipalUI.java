@@ -5,7 +5,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import br.com.pedro.LojaApp;
-import br.com.pedro.loja.ui.cadastro.ProdutoUI;
+import br.com.pedro.loja.ui.cadastro.CategoriaUI;
 import br.com.pedro.loja.ui.cadastro.UsuarioUI;
 
 import javax.imageio.ImageIO;
@@ -39,9 +39,9 @@ public class MenuPrincipalUI implements ActionListener,MouseListener{
 
         menuItem = new JMenuItem("Usuário", KeyEvent.VK_U); // item de menu
         menuItem.addActionListener(this);
-        menu.add(menuItem); // adiciono o item a op��o do menu
+        menu.add(menuItem); // adiciono o item a opção do menu
 
-        menuItem = new JMenuItem("Produto", KeyEvent.VK_P);
+        menuItem = new JMenuItem("Categoria",KeyEvent.VK_W);
         menuItem.addActionListener(this);
         menu.add(menuItem);
 
@@ -104,14 +104,13 @@ public class MenuPrincipalUI implements ActionListener,MouseListener{
             this.frame.repaint(); // atualiza o frame visualmente com os novos componentes
         }
 
-        if(e.getActionCommand().equals("Produto")){
-            ProdutoUI produto = new ProdutoUI();
+        if ( e.getActionCommand().equals("Categoria")){
+            CategoriaUI categoria = new CategoriaUI();
             this.frame.getContentPane().removeAll();
-            this.frame.getContentPane().add(produto);
+            this.frame.getContentPane().add(categoria);
             this.frame.validate();
             this.frame.repaint();
         }
-
 
 
        if ( e.getActionCommand().equals("Sair")){
@@ -138,15 +137,21 @@ public class MenuPrincipalUI implements ActionListener,MouseListener{
               JDialog sobre = new JDialog(this.frame,"Sobre");
               sobre.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
               try {
-                sobre.add(new JLabel(new ImageIcon(ImageIO.read(LojaApp.class.getResourceAsStream(IMAGE_URL)))));
-            } catch (IOException e1) {
+                
+                ImageIcon imagem = new ImageIcon(IMAGE_URL);
+                JLabel lblImage = new JLabel("Imagem");
+                lblImage.setIcon(imagem);
+                lblImage.setBounds(10, 10, 100, 100);
+                sobre.add(lblImage);
+            } catch (Exception e1) {
                 e1.printStackTrace();
             }
               JLabel lblTexto = new JLabel("Programa para uma loja");
+              lblTexto.setBounds(20, 50, 100, 25);
               sobre.add(lblTexto);
-              sobre.setSize(200,200);
-              sobre.validate();
-              sobre.repaint();
+              sobre.setSize(400,400);
+              sobre.pack();
+              sobre.setLocationByPlatform(true);
               sobre.setVisible(true);
               
     

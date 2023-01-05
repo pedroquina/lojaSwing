@@ -2,13 +2,13 @@ package br.com.pedro.loja.entity;
 
 public class UsuarioEntity {
     
-    private Integer UsuarioId;
+    private Integer usuarioId;
     private String nome;
     private String email;
     private String senha;
 
     public UsuarioEntity(Integer id, String nome, String email, String senha){
-        this.UsuarioId = id;
+        this.usuarioId = id;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
@@ -16,10 +16,10 @@ public class UsuarioEntity {
     }
 
     public Integer getUsuarioId() {
-        return UsuarioId;
+        return usuarioId;
     }
     public void setUsuarioId(Integer usuarioId) {
-        UsuarioId = usuarioId;
+        usuarioId = usuarioId;
     }
     public String getNome() {
         return nome;
