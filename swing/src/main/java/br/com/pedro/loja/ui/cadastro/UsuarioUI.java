@@ -1,7 +1,5 @@
 package br.com.pedro.loja.ui.cadastro;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -38,25 +36,25 @@ public class UsuarioUI extends JPanel implements ActionListener, ListSelectionLi
     private JPasswordField txtSenha = new JPasswordField();
     private String[] tituloColunas = {"ID","Nome","Email",""};
     private JTable tblUsuario = new JTable(){
-        public boolean editCellAt(int row, int column, java.util.EventObject e) {  // não permitir edição
+        public boolean editCellAt(int row, int column, java.util.EventObject e) {  // nï¿½o permitir ediï¿½ï¿½o
             return false;
          }
      };
-    private JScrollPane scroll = new JScrollPane(tblUsuario);
+    private JScrollPane scroll = new JScrollPane(tblUsuario);// barra de rolagem na tabela
     
     public UsuarioUI(){
         componentes();
     }
 
     void componentes(){
-        this.setLayout(null); // layout é o programador que define a posição dos componentes
+        this.setLayout(null); // layout ï¿½ o programador que define a posiï¿½ï¿½o dos componentes
         int larguraPanel = this.getWidth();
         int alturaPanel = this.getHeight();
 
         lblId.setText("ID");  // configura o texto do componente
         lblId.setBounds(10,10,80,25); // coordenadas ( x, y, largura e altura )
         txtId.setBounds(10,30,80,25);
-        txtId.setEnabled(false);  // desabilita edição
+        txtId.setEnabled(false);  // desabilita ediï¿½ï¿½o
         lblNome.setText("Nome");
         lblNome.setBounds(10,60,80,25);
         txtNome.setBounds(10,80,80,25);
@@ -77,7 +75,7 @@ public class UsuarioUI extends JPanel implements ActionListener, ListSelectionLi
         btnLimpar.addActionListener(this);
         btnExcluir.addActionListener(this);
         tblUsuario.getSelectionModel().addListSelectionListener(this);  // configura captura de evento na tabela
-        tblUsuario.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // permite seleção da linha da tabela
+        tblUsuario.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // permite seleï¿½ï¿½o da linha da tabela
         
         
         
@@ -100,14 +98,14 @@ public class UsuarioUI extends JPanel implements ActionListener, ListSelectionLi
 
 
     /*
-     * Atualizar conteúdo da tabela (Jtable) com os dados do banco de dados
+     * Atualizar conteÃºdo da tabela (Jtable) com os dados do banco de dados
      */
     public void atualizarTabela(){
         UsuarioService usuarioService = new UsuarioService();
 
         List<UsuarioEntity> lista = usuarioService.listar();
         DefaultTableModel modelo = (DefaultTableModel) tblUsuario.getModel();
-        modelo.setColumnIdentifiers(tituloColunas); // configura títulos das colunas da tabela
+        modelo.setColumnIdentifiers(tituloColunas); // configura tï¿½tulos das colunas da tabela
         modelo.setRowCount(0); // remove todas as linhsa da tabela
         lista.forEach(usuario ->{ // percorre todos os objetos da lista
             modelo.addRow(new Object[]{ // adiciona os atributos do objeto a linha da tabela
@@ -124,7 +122,7 @@ public class UsuarioUI extends JPanel implements ActionListener, ListSelectionLi
 
 
     /*
-     * Esse método é chamado a cada evento de click do mouse
+     * Esse mÃ©todo Ã© chamado a cada evento de click do mouse
      */
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -152,10 +150,10 @@ public class UsuarioUI extends JPanel implements ActionListener, ListSelectionLi
 
         if( e.getActionCommand().equals("Excluir")){
             if ( txtId.getText().equals("") ){
-                JOptionPane.showMessageDialog(this, "Esse registro não pode ser excluido");
+                JOptionPane.showMessageDialog(this, "Esse registro nï¿½o pode ser excluido");
                 return;
             }
-            if (JOptionPane.showConfirmDialog(this, "Confirma a exclusão ?","Excluir",JOptionPane.OK_CANCEL_OPTION)==JOptionPane.CANCEL_OPTION){
+            if (JOptionPane.showConfirmDialog(this, "Confirma a exclusï¿½o ?","Excluir",JOptionPane.OK_CANCEL_OPTION)==JOptionPane.CANCEL_OPTION){
                 return;
             }
             UsuarioService usuarioService = new UsuarioService();
@@ -167,7 +165,7 @@ public class UsuarioUI extends JPanel implements ActionListener, ListSelectionLi
 
 
     /*
-     * Esse método é chamado ao clicar nas linhas da tabela
+     * Esse mï¿½todo ï¿½ chamado ao clicar nas linhas da tabela
      */
     @Override
     public void valueChanged(ListSelectionEvent e) {

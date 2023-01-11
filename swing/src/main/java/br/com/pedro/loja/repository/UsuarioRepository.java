@@ -48,7 +48,7 @@ public class UsuarioRepository {
 
         ResultSet rs = con.executeSelect(sql);
         if ( rs.next()){
-            return bdParaEntity(rs);
+            return registrosParaEntity(rs);
         }
 
         return null;
@@ -61,12 +61,12 @@ public class UsuarioRepository {
         ResultSet rs = con.executeSelect(sql);
 
         while(rs.next()){
-            lista.add( bdParaEntity(rs));
+            lista.add( registrosParaEntity(rs));
         }
 
         return lista;
     }
-    private UsuarioEntity bdParaEntity(ResultSet rs) throws SQLException{
+    private UsuarioEntity registrosParaEntity(ResultSet rs) throws SQLException{
         UsuarioEntity usuarioEntity = new UsuarioEntity(
             rs.getInt("usuario_id"),
             rs.getString("nome"),

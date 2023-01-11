@@ -1,11 +1,17 @@
 package br.com.pedro.loja.ui.cadastro;
 
+import java.util.List;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
+import br.com.pedro.loja.entity.CategoriaEntity;
+import br.com.pedro.loja.service.CategoriaService;
 
 public class CategoriaUI extends JPanel {
     
@@ -19,6 +25,7 @@ public class CategoriaUI extends JPanel {
     private JButton btnSalvar = new JButton();
     private JButton btnLimpar = new JButton();
     private JButton btnExcluir = new JButton();
+    private String[] tituloColunas = { "ID", "NOME", "DATA"};
     private JTable tblTabela = new JTable(){
         public boolean editCellAt(int row, int column, java.util.EventObject e) {  // n?o permitir edi??o
             return false;
@@ -31,7 +38,7 @@ public class CategoriaUI extends JPanel {
         componentes();
     }
 
-    void componentes(){
+    private void componentes(){
         this.setLayout(null);
         this.setSize(300, 300);
         lblTitulo.setText("CATEGORIA");
@@ -70,8 +77,25 @@ public class CategoriaUI extends JPanel {
 
     }
 
-    void atualizarTabela(){
-        
+    private void atualizarTabela(){
+        CategoriaService categoriaService = new CategoriaService();
+
+        List<CategoriaEntity> lista = categoriaService.listar();
+
+
+        DefaultTableModel modelo = (DefaultTableModel) tblTabela.getModel();
+        modelo.setColumnIdentifiers(tituloColunas); // configura ttulos das colunas da tabela
+        modelo.setRowCount(0); // remove todas as linhsa da tabela
+        lista.forEach(categoria ->{ // percorre todos os objetos da lista
+                //System.out.println( categoria.getCategoriaId() + " : " + categoria.getNome() + " : " + categoria.getCriado() );
+                modelo.addRow(new Object[]{ // adiciona os atributos do objeto a linha da tabela
+                    categoria.getCategoriaId(),
+                    categoria.getNome(),
+                    categoria.getCriado()
+                });
+        });            
+
+
     }
 
 }
