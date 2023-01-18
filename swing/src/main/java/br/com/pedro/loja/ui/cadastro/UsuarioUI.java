@@ -47,14 +47,14 @@ public class UsuarioUI extends JPanel implements ActionListener, ListSelectionLi
     }
 
     void componentes(){
-        this.setLayout(null); // layout � o programador que define a posi��o dos componentes
+        this.setLayout(null); // layout é o programador que define a posição dos componentes
         int larguraPanel = this.getWidth();
         int alturaPanel = this.getHeight();
 
         lblId.setText("ID");  // configura o texto do componente
         lblId.setBounds(10,10,80,25); // coordenadas ( x, y, largura e altura )
         txtId.setBounds(10,30,80,25);
-        txtId.setEnabled(false);  // desabilita edi��o
+        txtId.setEnabled(false);  // desabilita ediçãoo
         lblNome.setText("Nome");
         lblNome.setBounds(10,60,80,25);
         txtNome.setBounds(10,80,80,25);
@@ -127,6 +127,7 @@ public class UsuarioUI extends JPanel implements ActionListener, ListSelectionLi
     @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("Command : " + e.getActionCommand());
+        
         if ( e.getActionCommand().equals("Salvar")){
             UsuarioEntity usuarioEntity = new UsuarioEntity(
                 Integer.valueOf("0"+txtId.getText()),
@@ -150,10 +151,10 @@ public class UsuarioUI extends JPanel implements ActionListener, ListSelectionLi
 
         if( e.getActionCommand().equals("Excluir")){
             if ( txtId.getText().equals("") ){
-                JOptionPane.showMessageDialog(this, "Esse registro n�o pode ser excluido");
+                JOptionPane.showMessageDialog(this, "Esse registro não pode ser excluído");
                 return;
             }
-            if (JOptionPane.showConfirmDialog(this, "Confirma a exclus�o ?","Excluir",JOptionPane.OK_CANCEL_OPTION)==JOptionPane.CANCEL_OPTION){
+            if (JOptionPane.showConfirmDialog(this, "Confirma a exclusão ?","Excluir",JOptionPane.OK_CANCEL_OPTION)==JOptionPane.CANCEL_OPTION){
                 return;
             }
             UsuarioService usuarioService = new UsuarioService();
@@ -165,7 +166,7 @@ public class UsuarioUI extends JPanel implements ActionListener, ListSelectionLi
 
 
     /*
-     * Esse m�todo � chamado ao clicar nas linhas da tabela
+     * Esse método é chamado ao clicar nas linhas da tabela
      */
     @Override
     public void valueChanged(ListSelectionEvent e) {

@@ -14,4 +14,14 @@ public class CategoriaService {
 
         return lista;
     }
+
+    public void excluir(Integer id){
+        categoriaRepository.excluir(id);
+    }
+
+    public CategoriaEntity salvar(CategoriaEntity categoriaEntity){
+        return categoriaRepository.salvar(categoriaEntity);
+    }
+
+
 }

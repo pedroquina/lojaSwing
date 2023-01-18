@@ -4,16 +4,24 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import br.com.pedro.loja.entity.CategoriaEntity;
 import br.com.pedro.loja.service.CategoriaService;
 
-public class CategoriaUI extends JPanel {
+public class CategoriaUI extends JPanel implements ActionListener, ListSelectionListener{
     
     private JLabel lblTitulo = new JLabel();
     private JLabel lblId = new JLabel();
@@ -26,12 +34,12 @@ public class CategoriaUI extends JPanel {
     private JButton btnLimpar = new JButton();
     private JButton btnExcluir = new JButton();
     private String[] tituloColunas = { "ID", "NOME", "DATA"};
-    private JTable tblTabela = new JTable(){
+    private JTable tblCategoria = new JTable(){
         public boolean editCellAt(int row, int column, java.util.EventObject e) {  // n?o permitir edi??o
             return false;
         }
         };
-    private JScrollPane scroll = new JScrollPane(tblTabela);
+    private JScrollPane scroll = new JScrollPane(tblCategoria);
 
 
     public CategoriaUI(){
@@ -71,6 +79,11 @@ public class CategoriaUI extends JPanel {
         this.add(btnExcluir);
         scroll.setBounds(10, 120, 450, 250);
         this.add(scroll);
+        // Listeners de eventos
+        tblCategoria.getSelectionModel().addListSelectionListener(this);
+        btnSalvar.addActionListener(this);
+        btnExcluir.addActionListener(this);
+        btnLimpar.addActionListener(this);
         
         
         atualizarTabela();
@@ -83,7 +96,7 @@ public class CategoriaUI extends JPanel {
         List<CategoriaEntity> lista = categoriaService.listar();
 
 
-        DefaultTableModel modelo = (DefaultTableModel) tblTabela.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) tblCategoria.getModel();
         modelo.setColumnIdentifiers(tituloColunas); // configura ttulos das colunas da tabela
         modelo.setRowCount(0); // remove todas as linhsa da tabela
         lista.forEach(categoria ->{ // percorre todos os objetos da lista
@@ -98,4 +111,66 @@ public class CategoriaUI extends JPanel {
 
     }
 
+    @Override
+    public void valueChanged(ListSelectionEvent e) {
+       
+        if ( tblCategoria.getSelectedRow()<0) return;
+
+        int linha = tblCategoria.getSelectedRow();
+
+        txtId.setText(tblCategoria.getModel().getValueAt(linha, 0).toString());
+        txtNome.setText(tblCategoria.getModel().getValueAt(linha, 1).toString());
+        txtData.setText(tblCategoria.getModel().getValueAt(linha,2).toString());
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        
+        System.out.println("Objeto : " + e.getActionCommand());
+
+        if ( e.getActionCommand().equals("Limpar") ) {
+            limparComponentes();
+            return;
+        }
+
+        if ( e.getActionCommand().equals("Excluir")){
+            if ( txtId.getText().equals("") ){
+                JOptionPane.showMessageDialog(this, "Esse registro não pode ser excluído");
+                return;
+            }
+            if (JOptionPane.showConfirmDialog(this, "Confirma a exclusão ?","Excluir",JOptionPane.OK_CANCEL_OPTION)==JOptionPane.CANCEL_OPTION){
+                return;
+            }
+            CategoriaService categoriaService = new CategoriaService();
+            categoriaService.excluir( Integer.valueOf(txtId.getText()) );
+            atualizarTabela();
+            limparComponentes();
+        }
+
+        if ( e.getActionCommand().equals("Salvar")){
+
+            CategoriaEntity categoriaEntity = new CategoriaEntity();
+            categoriaEntity.setCategoriaId(Integer.valueOf("0"+txtId.getText()));
+            categoriaEntity.setNome(txtNome.getText());
+            // conversão String para LocalDateTime
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            LocalDateTime dateTime = LocalDateTime.parse(txtData.getText(), formatter);            
+            categoriaEntity.setCriado( dateTime );
+
+            CategoriaService categoriaService = new CategoriaService();
+            categoriaEntity = categoriaService.salvar(categoriaEntity);
+            atualizarTabela();
+            limparComponentes();
+        }
+        
+    }
+
+
+    private void limparComponentes(){
+        txtId.setText("");
+        txtNome.setText("");
+        txtData.setText("");
+        txtNome.requestFocus(); // coloca o cursor no objeto
+    }
 }

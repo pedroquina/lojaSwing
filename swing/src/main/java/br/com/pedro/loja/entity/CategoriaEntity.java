@@ -8,6 +8,8 @@ public class CategoriaEntity {
     private String nome;
     private LocalDateTime criado; // poderia utilizar a classe java.util.Date
 
+    public CategoriaEntity(){}
+
     public CategoriaEntity(Integer id, String nome, LocalDateTime criado){
         this.categoriaId = id;
         this.nome = nome;

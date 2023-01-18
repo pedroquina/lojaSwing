@@ -32,6 +32,33 @@ public class CategoriaRepository {
         return lista;
     }
 
+    public void excluir( Integer id){
+        String sql = "delete from categoria where categoria_id =" + id;
 
+        conexao.executeUpdate(sql);
+    }
+
+
+    public CategoriaEntity salvar(CategoriaEntity categoriaEntity){
+
+        if ( categoriaEntity.getCategoriaId()==null || categoriaEntity.getCategoriaId()==0){ // insert
+            String sql = "insert into categoria ( nome, criado ) values (" +
+                "'" + categoriaEntity.getNome() + "'," +
+                "'" + categoriaEntity.getCriado().toString() + "');";
+                int id = conexao.executeInsertGetId(sql);
+                categoriaEntity.setCategoriaId(id);
+
+        }else { // update
+            String sql = "update categoria set " + 
+                "nome='" + categoriaEntity.getNome() + "'," + 
+                "criado='" + categoriaEntity.getCriado().toString() + "'" +
+                " where categoria_id = " + categoriaEntity.getCategoriaId();
+
+                conexao.executeUpdate(sql);
+
+        }
+
+        return categoriaEntity;
+    }
 
 }
