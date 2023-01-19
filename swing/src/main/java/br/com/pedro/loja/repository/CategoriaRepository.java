@@ -2,6 +2,7 @@ package br.com.pedro.loja.repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +43,7 @@ public class CategoriaRepository {
     public CategoriaEntity salvar(CategoriaEntity categoriaEntity){
 
         if ( categoriaEntity.getCategoriaId()==null || categoriaEntity.getCategoriaId()==0){ // insert
+            categoriaEntity.setCriado(LocalDateTime.now());
             String sql = "insert into categoria ( nome, criado ) values (" +
                 "'" + categoriaEntity.getNome() + "'," +
                 "'" + categoriaEntity.getCriado().toString() + "');";
@@ -50,8 +52,7 @@ public class CategoriaRepository {
 
         }else { // update
             String sql = "update categoria set " + 
-                "nome='" + categoriaEntity.getNome() + "'," + 
-                "criado='" + categoriaEntity.getCriado().toString() + "'" +
+                "nome='" + categoriaEntity.getNome() +"'" + 
                 " where categoria_id = " + categoriaEntity.getCategoriaId();
 
                 conexao.executeUpdate(sql);

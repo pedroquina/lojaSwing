@@ -65,15 +65,16 @@ public class CategoriaUI extends JPanel implements ActionListener, ListSelection
         this.add(txtNome);
         lblData.setText("Data");
         lblData.setBounds(10, 80, 50, 25);
-        txtData.setBounds(50, 80, 100, 25);
+        txtData.setBounds(50, 80, 150, 25);
+        txtData.setEditable(false);
         this.add(lblData);
         this.add(txtData);
         btnSalvar.setText("Salvar");
-        btnSalvar.setBounds(170, 80, 80, 25);
+        btnSalvar.setBounds(220, 80, 80, 25);
         btnLimpar.setText("Limpar");
-        btnLimpar.setBounds(270, 80, 80, 25);
+        btnLimpar.setBounds(320, 80, 80, 25);
         btnExcluir.setText("Excluir");
-        btnExcluir.setBounds(370, 80, 80, 25);
+        btnExcluir.setBounds(420, 80, 80, 25);
         this.add(btnSalvar);
         this.add(btnLimpar);
         this.add(btnExcluir);
@@ -154,9 +155,9 @@ public class CategoriaUI extends JPanel implements ActionListener, ListSelection
             categoriaEntity.setCategoriaId(Integer.valueOf("0"+txtId.getText()));
             categoriaEntity.setNome(txtNome.getText());
             // conversão String para LocalDateTime
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            LocalDateTime dateTime = LocalDateTime.parse(txtData.getText(), formatter);            
-            categoriaEntity.setCriado( dateTime );
+            //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            //LocalDateTime dateTime = LocalDateTime.parse(txtData.getText(), formatter);            
+            //categoriaEntity.setCriado( dateTime );
 
             CategoriaService categoriaService = new CategoriaService();
             categoriaEntity = categoriaService.salvar(categoriaEntity);
